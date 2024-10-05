@@ -10,3 +10,6 @@
 [submodule "2semestre/pratica_sd"]
 	path = 2semestre/pratica_sd
 	url = git@github.com:fccerri/pratica_sd
+[submodule "1semestre/ICC/Projeto_icc1"]
+	path = 1semestre/ICC/Projeto_icc1
+	url = git@github.com:fccerri/Projeto_icc1
