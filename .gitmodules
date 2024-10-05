@@ -1,3 +1,9 @@
 [submodule "2semestre/alg/Caixeiro"]
 	path = 2semestre/alg/Caixeiro
 	url = git@github.com:Petroncini/Caixeiro.git
+[submodule "1semestre/eletronica/projeto-fonte-usp"]
+	path = 1semestre/eletronica/projeto-fonte-usp
+	url = git@github.com:vrveiga/projeto-fonte-usp.git
+[submodule "1semestre/eletronica/relogio-binario"]
+	path = 1semestre/eletronica/relogio-binario
+	url = git@github.com:vrveiga/relogio-binario.git
