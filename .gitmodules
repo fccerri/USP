@@ -7,3 +7,6 @@
 [submodule "1semestre/eletronica/relogio-binario"]
 	path = 1semestre/eletronica/relogio-binario
 	url = git@github.com:vrveiga/relogio-binario.git
+[submodule "2semestre/pratica_sd"]
+	path = 2semestre/pratica_sd
+	url = git@github.com:fccerri/pratica_sd
