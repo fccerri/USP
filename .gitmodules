@@ -16,3 +16,6 @@
 [submodule "2semestre/lab_icc2/teste/lab_icc2_trabalhos"]
 	path = 2semestre/lab_icc2/teste/lab_icc2_trabalhos
 	url = git@github.com:fccerri/lab_icc2_trabalhos.git
+[submodule "2semestre/lab_icc2/temp/lab_icc2_trabalhos"]
+	path = 2semestre/lab_icc2/temp/lab_icc2_trabalhos
+	url = git@github.com:fccerri/lab_icc2_trabalhos.git
