@@ -1,0 +1,9 @@
+Inicio
+inteiro: n, cont;
+cont <- 1
+leia (n);
+enquanto (n<>0) faça   
+    cont <- cont*n;
+    n <- n-1;
+  fimenquanto;
+Fim.

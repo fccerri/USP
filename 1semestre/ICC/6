@@ -1,0 +1,6 @@
+Inicio
+inteiro a, b, c, x1, x2;
+leia (a, b, c);
+
+se ((b pot 2)-(4*a*c)<=0) então
+    x1 <- 

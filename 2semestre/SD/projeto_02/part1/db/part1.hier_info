@@ -1,0 +1,85 @@
+|part1
+Clk => flipflopt:f0.Clk
+Clk => flipflopt:f1.Clk
+Clk => flipflopt:f2.Clk
+Clk => flipflopt:f3.Clk
+Clk => flipflopt:f4.Clk
+Clk => flipflopt:f5.Clk
+Clk => flipflopt:f6.Clk
+Clk => flipflopt:f7.Clk
+T => enable1.IN1
+T => flipflopt:f0.T
+Q0 <= flipflopt:f0.Q
+Q1 <= flipflopt:f1.Q
+Q2 <= flipflopt:f2.Q
+Q3 <= flipflopt:f3.Q
+Q4 <= flipflopt:f4.Q
+Q5 <= flipflopt:f5.Q
+Q6 <= flipflopt:f6.Q
+Q7 <= flipflopt:f7.Q
+Clear => flipflopt:f0.Clear
+Clear => flipflopt:f1.Clear
+Clear => flipflopt:f2.Clear
+Clear => flipflopt:f3.Clear
+Clear => flipflopt:f4.Clear
+Clear => flipflopt:f5.Clear
+Clear => flipflopt:f6.Clear
+Clear => flipflopt:f7.Clear
+
+
+|part1|flipflopt:f0
+Clk => output.CLK
+T => output.OUTPUTSELECT
+Q <= output.DB_MAX_OUTPUT_PORT_TYPE
+Clear => output.OUTPUTSELECT
+
+
+|part1|flipflopt:f1
+Clk => output.CLK
+T => output.OUTPUTSELECT
+Q <= output.DB_MAX_OUTPUT_PORT_TYPE
+Clear => output.OUTPUTSELECT
+
+
+|part1|flipflopt:f2
+Clk => output.CLK
+T => output.OUTPUTSELECT
+Q <= output.DB_MAX_OUTPUT_PORT_TYPE
+Clear => output.OUTPUTSELECT
+
+
+|part1|flipflopt:f3
+Clk => output.CLK
+T => output.OUTPUTSELECT
+Q <= output.DB_MAX_OUTPUT_PORT_TYPE
+Clear => output.OUTPUTSELECT
+
+
+|part1|flipflopt:f4
+Clk => output.CLK
+T => output.OUTPUTSELECT
+Q <= output.DB_MAX_OUTPUT_PORT_TYPE
+Clear => output.OUTPUTSELECT
+
+
+|part1|flipflopt:f5
+Clk => output.CLK
+T => output.OUTPUTSELECT
+Q <= output.DB_MAX_OUTPUT_PORT_TYPE
+Clear => output.OUTPUTSELECT
+
+
+|part1|flipflopt:f6
+Clk => output.CLK
+T => output.OUTPUTSELECT
+Q <= output.DB_MAX_OUTPUT_PORT_TYPE
+Clear => output.OUTPUTSELECT
+
+
+|part1|flipflopt:f7
+Clk => output.CLK
+T => output.OUTPUTSELECT
+Q <= output.DB_MAX_OUTPUT_PORT_TYPE
+Clear => output.OUTPUTSELECT
+
+

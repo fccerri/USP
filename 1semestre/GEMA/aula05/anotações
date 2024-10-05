@@ -1,0 +1,67 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main () {
+    pair<int, string> variavel;
+
+    variavel=make_pair(2, "qlqrcoisa"); //primeira forma de fzr
+
+    variavel={3, "outracoisa"}; //segunda forma
+
+    variavel.first=4;
+    variavel.second="outra"; //terciera forma ]
+
+
+    vector<int> v2; //v2[]
+    v2.push_back(4); // v2 [4]
+    v2.push_back(4); // v2 [4,4]
+    v2.push_back(2); // v2 [4 , 4 , 2]
+    v2.push_back(1); // v2 [4, 4, 2, 1]
+    v2.pop_back(); // v2 [4, 4, 2]
+   
+    v2[v2.size()-1]; //acessa a ultima casa do vetor
+
+    for (int i=0; i<v.size(); i++) {
+        cout << v2[i] << "\n";
+
+
+        set<int> v3; //complexidade para inserir O(logn)
+        v3.insert(4);
+        v3.insert(4);
+        v3.insert(2);
+        v3.insert(1); //{1,z 2 ,4}
+        v3.erase(4); //{ 1, 2}
+
+        v3.begin(); //ponteiro
+        v3.end();
+
+        for (set<int>::iterator it=v3; it!=v3.end();it++) {
+            cout << *it << "/n";
+        }
+
+        cout << *(v.begin()) << "\n"
+
+        set<int>::iterator it=find(3)
+        if (it!=v.end()) {
+            cout << "achou\n";
+        else 
+            cout << "n achou"
+
+        v.find(3);
+
+        v.count();
+
+        v.lower_bound(2); //ponteiro maior(ou menor sla) ou igual a 2
+        v.upper_bound(5); //end (se não achar no set)
+
+        prev(it)
+
+    multiset<int> v4; //não se limita a 1 numero de cada
+    v.erase() //apaga quantos tiver - complexidade >
+    v.erase (v.find(2)); //apaga apenas qual o pontiero ta mostrando    
+
+
+    }
+
+
+}

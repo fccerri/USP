@@ -1,0 +1,43 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+void *aloca_vet(int tam, int TypeSize) {
+    void *v;
+    v = malloc(tam*TypeSize);
+    return v;
+}
+
+typedef struct livro {
+    char **titulo, **autor;
+    int ano, qtd;
+}livro;
+
+void entrada(livro **biblioteca, int n) {
+    char auxiliar[101];
+    for (int i = 0; i<n; i++) {
+        scanf(" %s", auxiliar);
+        if (i!=0) {
+            for (int j=0; j<n; j++) {
+                if ((*biblioteca)[j] )
+            
+            }
+        }
+    }
+    
+
+}
+
+
+
+int main (void) {
+    livro *biblioteca; int n;
+    scanf("%d", &n);
+
+    entrada(&biblioteca, n);
+
+    
+
+
+
+    return 0;
+}
