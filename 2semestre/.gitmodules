@@ -1,0 +1,3 @@
+[submodule "lab_icc2/lab_icc2_trabalhos"]
+	path = lab_icc2/lab_icc2_trabalhos
+	url = git@github.com:fccerri/lab_icc2_trabalhos.git
