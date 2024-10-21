@@ -1,3 +1,6 @@
 [submodule "lab_icc2/lab_icc2_trabalhos"]
 	path = lab_icc2/lab_icc2_trabalhos
 	url = git@github.com:fccerri/lab_icc2_trabalhos.git
+[submodule "icc2/gerente-de-processos"]
+	path = icc2/gerente-de-processos
+	url = git@github.com:vrveiga/gerente-de-processos
