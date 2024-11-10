@@ -15,8 +15,6 @@ struct arv_bin {
     int estritamenteBinaria;
 };
 
-void imprime_caminho(NO *raiz);
-
 
 NO *acha_no(NO *raiz, int chave) {
     if (raiz == NULL) return NULL; //caso não encontre
@@ -39,10 +37,18 @@ AB *ab_criar(void) {
 }
 
 bool ab_inserir (AB *T, ITEM *item, int lado, int chave) {
-    NO *no_de_insercao = acha_no(T->raiz, chave);
-    if (T->raiz == NULL) no_de_insercao = T->raiz;
+    if (T->raiz == NULL) {
+        NO *no_raiz = malloc(sizeof(NO*));
+        no_raiz->dados = item;
+        no_raiz->filho_dir =NULL;
+        no_raiz->filho_esq =NULL;
+        T->raiz = no_raiz;
+        return true;
+    }
 
-    if (no_de_insercao != NULL  ) {
+    NO *no_de_insercao = acha_no(T->raiz, chave);
+
+    if (no_de_insercao != NULL      ) {
         NO *filho = malloc(sizeof(NO));
         filho->dados = item;
         filho->filho_dir =NULL;
@@ -58,14 +64,9 @@ bool ab_inserir (AB *T, ITEM *item, int lado, int chave) {
         else
             (T->estritamenteBinaria)--;
 
-        imprime_caminho(no_de_insercao);
-        printf("\n");
-        imprime_caminho(T->raiz);
-
-
-        return 1;
+        return true;
     }
-    return 0;
+    return false;
 
 }
 
@@ -102,7 +103,5 @@ void ab_apagar_arvore(AB **T) {
  
  
 int ab_estritamente_binaria (AB *T){ 
-    if (T->estritamenteBinaria > 0) return 1; //não é estritamente binaria
-
-    return 0;
-}
+    return T->estritamenteBinaria > 0; //caso > 0 não é estritamente binaria
+}                                      // caso = 0 é estritamente binaria  
