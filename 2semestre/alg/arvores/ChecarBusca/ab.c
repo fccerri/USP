@@ -13,9 +13,10 @@ typedef struct no_ {
 struct arv_bin {
     NO *raiz;
     int estritamenteBinaria;
+    int checaBusca;
 };
 
-l
+
 NO *acha_no(NO *raiz, int chave) {
     if (raiz == NULL) return NULL; //caso não encontre
     int chave_aux = item_get_chave(raiz->dados); 
@@ -33,6 +34,7 @@ AB *ab_criar(void) {
     AB *aux = malloc(sizeof(AB));
     aux->raiz = NULL;
     aux->estritamenteBinaria = 0;
+    aux->checaBusca = 0;
     return aux; 
 }
 
@@ -54,10 +56,16 @@ bool ab_inserir (AB *T, ITEM *item, int lado, int chave) {
         filho->filho_dir =NULL;
         filho->filho_esq =NULL;
 
-        if (lado == FILHO_DIR) 
+        if (lado == FILHO_DIR) {
             no_de_insercao->filho_dir = filho;
-        else 
+            if (item_get_chave(item) < chave) 
+                T->checaBusca++;
+        }
+        else {
             no_de_insercao->filho_esq = filho;
+            if (item_get_chave(item) > chave) 
+                T->checaBusca++;
+        }
 
         if (no_de_insercao->filho_dir == NULL || no_de_insercao->filho_esq == NULL)
             (T->estritamenteBinaria)++;
@@ -105,3 +113,7 @@ void ab_apagar_arvore(AB **T) {
 int ab_estritamente_binaria (AB *T){ 
     return T->estritamenteBinaria > 0; //caso > 0 não é estritamente binaria
 }                                      // caso = 0 é estritamente binaria  
+
+int ab_checar_busca (AB *T){ 
+    return T->checaBusca > 0; //caso > 0 não é uma arvore de busca
+}                             // caso = 0 é uma arvore de busca  
