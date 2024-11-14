@@ -15,7 +15,7 @@ struct arv_bin {
     int estritamenteBinaria;
 };
 
-
+l
 NO *acha_no(NO *raiz, int chave) {
     if (raiz == NULL) return NULL; //caso não encontre
     int chave_aux = item_get_chave(raiz->dados); 
