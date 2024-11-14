@@ -4,3 +4,6 @@
 [submodule "icc2/gerente-de-processos"]
 	path = icc2/gerente-de-processos
 	url = git@github.com:vrveiga/gerente-de-processos
+[submodule "icc2/soletra-terminal"]
+	path = icc2/soletra-terminal
+	url = git@github.com:vrveiga/soletra-terminal.git
