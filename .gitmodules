@@ -25,3 +25,6 @@
 [submodule "3semestre/poo/arvores/AVLArray"]
 	path = 3semestre/poo/arvores/AVLArray
 	url = git@github.com:fccerri/AVLArray.git
+[submodule "2semestre/fisica/orb"]
+	path = 2semestre/fisica/orb
+        url = <git@github.com:vrveiga/orb.git>
