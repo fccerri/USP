@@ -7,3 +7,6 @@
 [submodule "icc2/soletra-terminal"]
 	path = icc2/soletra-terminal
 	url = git@github.com:vrveiga/soletra-terminal.git
+[submodule "fisica/simulador-lancamento"]
+	path = fisica/simulador-lancamento
+	url = git@github.com:vrveiga/simulador-lancamento.git

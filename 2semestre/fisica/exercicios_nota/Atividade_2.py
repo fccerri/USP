@@ -6,7 +6,8 @@ from matplotlib.animation import FuncAnimation
 Atividade 2: Simulação com Animação do Sistema Massa-Mola
     Aluno: Felipe Camargo Cerri
     Numero USP: 15451119
-    23/11/2024
+    23/11/2024  
+    
 '''
 
 # Constantes do sistema
