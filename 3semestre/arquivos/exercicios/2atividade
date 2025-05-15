@@ -1,0 +1,54 @@
+Felipe Camargo Cerri - 15451119
+
+1. 
+Abre arquivo para leitura
+se RRN >= proxRRN
+    escreve "Registro não econtrado
+senão    
+    proxByteOf = RRN * tamReg
+    fp = proxByteOf
+    se não esta removido
+        escreve registro
+    senão
+        escreve "Registro não encontrado"
+fecha arquivo
+
+2.
+Abre arquivo para leitura e escrita
+se RRN >= proxRRN
+    escreve "Registro não econtrado
+senão    
+    proxByteOf = RRN * tamReg
+    fp = proxByteOf
+    se não esta removido
+        marca como removido
+        prox = topo
+        topo = RRN
+    senão
+        escreve "Registro não encontrado"
+fecha arquivo
+
+3. 
+Abre arquivo para escrita
+se topo = -1
+    proxByteOf =  proxRRN * tamReg
+    proxRRN ++
+    fp = proxByteOf
+senão 
+    proxByteOf = topo * tamReg
+    fp = proxByteOf
+    topo = proxByteOf
+
+escreve no registro
+fecha arquivo 
+
+4.
+Abre arquivo para leitura
+varaivel aux = topo 
+escreve aux
+enquanto aux != -1 
+    proxByteOf = topo * tamReg
+    fp = proxByteOf
+    escreve aux
+    aux = prox
+fecha arquivo
