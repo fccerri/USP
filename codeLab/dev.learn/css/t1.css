@@ -1,0 +1,33 @@
+/*Criamos essa div conteudo que engloba todos os elementos da pagina, para que possamos deixar
+eles em coluna aplicando o flex-direction, e centralizar todos com o align items*/
+.conteudo{
+    display:flex;
+    flex-direction:column; /*conteudo separado em coluna*/
+    align-items: center; /* centraliza os itens verticalmente */
+}
+
+#header {
+    color: #34D0AD; /*cor do texto do título*/
+    text-align:center;  /*título alinhado no centro horizontalmente*/
+}
+
+.paragrafo {
+    border: 3px solid #34D0AD;  /*border de 3 pixeis nos parágrafos, com a cor especificada*/
+    height:fit-content; /*altura e largura correspondem ao tamanho do conteúdo*/
+    width:fit-content; 
+}
+
+.flexbox {
+    display: flex;
+    width: 50%; /*a largura da flexbox é 50% da largura da pagina*/
+    align-items:center; /* centraliza os itens verticalmente */
+    justify-content:space-around; /*itens tem espaço igual entre eles*/
+}
+
+#autor { 
+     color: #34D0AD; /*cor do texto*/
+     border: 3px solid black; /*border preta e sólida de 3 pixeis*/
+     border-radius: 25px; /*faz a borda ser curvada*/
+     padding: 10px; /*padding para que o texto não fique muito perto da borda*/
+     width:fit-content; /*largura é o tamanho necessário para caber o conteúdo*/
+}

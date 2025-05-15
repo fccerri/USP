@@ -1,0 +1,32 @@
+#content{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+
+#poema {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;    
+}
+
+.paragrafo{
+    border: 2px solid aqua;
+    width: fit-content;
+    width: fit-content;
+}
+
+h1{
+    color: aqua;
+    text-align: center;
+}
+
+#Autor{
+    color: aqua;
+    border: 2px solid black ;
+    border-radius: 20px;
+    padding: 2px;
+    width: fit-content;
+    height: fit-content;
+}
