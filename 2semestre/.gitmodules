@@ -10,3 +10,6 @@
 [submodule "fisica/simulador-lancamento"]
 	path = fisica/simulador-lancamento
 	url = git@github.com:vrveiga/simulador-lancamento.git
+[submodule "fisica/orb"]
+	path = fisica/orb
+	url = git@github.com:vrveiga/orb.git
