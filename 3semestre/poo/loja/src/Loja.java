@@ -12,62 +12,68 @@ public class Loja {
     public boolean inserirProduto(Produto item) {
         if (tamanhoMaximoEstoque < tamanhoEstoque )
             return false;
+        for (int i = 0; i < tamanhoEstoque; i++) {
+            if (estoque[i].codigo.equals(item.codigo)) {
+                return false;
+            }
+        }
             
         estoque[tamanhoEstoque] = item;
         tamanhoEstoque++;
         return true;
     }
 
-    public boolean adicionarProduto(Produto item, int quantidade) {
+    public boolean adicionarProduto(String codigo, int quantidade) {
         for (int i = 0; i < tamanhoEstoque; i++) {
-            if (item.codigo == estoque[i].codigo) {
+            if (estoque[i].codigo.equals(codigo)) {
+
                 estoque[i].quantidade += quantidade;
+                System.out.println("Operação realizada com sucesso: " + estoque[i].codigo + "\n");
                 return true;
             }
         }
+        System.out.println("***Erro: Código inexistente: " + codigo + "\n");
         return false;
     }
 
-    public boolean comprarProduto(int codigo, int quantidade) {
+    public boolean venderProduto(String codigo, int quantidade) {
         for (int i = 0; i < tamanhoEstoque; i++) {
-            if (estoque[i].codigo == codigo) {
+            if (estoque[i].codigo.equals(codigo)) {
                 if (estoque[i].quantidade >= quantidade) {
+                    estoque[i].quantidade -= quantidade;
+                    System.out.println("Operação realizada com sucesso: " + estoque[i].codigo+ "\n");
                     return true;
                 }
-                break;
+                System.out.printf("***Erro: Estoque insuficiente: %s Quantidade: %d\n", codigo, quantidade);
+                return false;
             }
-        }   
-        return false;
-    }
-    
-    public boolean procurarProduto(int codigo) {
-        for (int i = 0; i < tamanhoEstoque; i++) {
-            if (estoque[i].codigo == codigo) {
-                return true;
-    
-            }
-        }   
+        }
+        System.out.printf("***Erro: Código inexistente: %s\n", codigo);
+        System.out.flush();
         return false;
     }
 
-    public void printaProduto(int codigo) {
+    public Produto procurarProduto(String criterio) {
         for (int i = 0; i < tamanhoEstoque; i++) {
-            if (estoque[i].codigo == codigo) {
-                System.out.println(estoque[i]);
-                break;
+            if (estoque[i].nome.equals(criterio) || estoque[i].codigo.equals(criterio)) {
+                return estoque[i];
             }
-        }   
+        }
+        return null;
     }
+
 
     public void mostraEstoqueTipo(String tipo) {
         int count = 0;
         for (int i = 0; i < tamanhoEstoque; i++) {
             if (estoque[i].tipo.equals(tipo)) {
                 System.out.println(estoque[i]);
-                count++;
+                System.out.println("Quantidade: " + estoque[i].quantidade + '\n');
+                count += estoque[i].quantidade;
             }
-            System.out.println("Quantidade de " + tipo + "s: " + count);
         }
+        System.out.println("Quantidade de " + tipo + "s: " + count + '\n');
+
     }
 
     public void mostraEstoque() {
@@ -91,10 +97,13 @@ public class Loja {
                 tipos[qtdTipos] = tipoAtual;
                 qtdTipos++;
                 mostraEstoqueTipo(tipoAtual); // printa todos os tipos iguais
-                System.out.println();
+
             }
         }
+        System.out.println();
+
     }
+
 
 }
     

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="VcsDirectoryMappings">
+    <mapping directory="$PROJECT_DIR$/../../../.." vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../../../../1semestre/ICC/Projeto_icc1" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../../../../1semestre/eletronica/projeto-fonte-usp" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../../../../1semestre/eletronica/relogio-binario" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../../../../2semestre/alg/Caixeiro" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../../../../2semestre/fisica/orb" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../../../../2semestre/pratica_sd" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../../../Aquivos_2025" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../../../funcional/trabalhoFuncional01" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../../../org_comp/calculadoraAssembly" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../../arvores/AVLArray" vcs="Git" />
+  </component>
+</project>
