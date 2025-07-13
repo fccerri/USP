@@ -31,3 +31,6 @@
 [submodule "3semestre/funcional/trabalhoFuncional02"]
 	path = 3semestre/funcional/trabalhoFuncional02
 	url = git@github.com:fccerri/trabalhoFuncional02.git
+[submodule "3semestre/poo/Curso_Scrapper"]
+	path = 3semestre/poo/Curso_Scrapper
+	url = git@github.com:Nickson8/Curso_Scrapper.git
