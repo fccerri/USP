@@ -19,9 +19,6 @@
 [submodule "3semestre/funcional/trabalhoFuncional01"]
 	path = 3semestre/funcional/trabalhoFuncional01
 	url = git@github.com:fccerri/trabalhoFuncional01.git
-[submodule "3semestre/Aquivos_2025"]
-	path = 3semestre/Aquivos_2025
-	url = git@github.com:Nickson8/Aquivos_2025.git
 [submodule "3semestre/poo/arvores/AVLArray"]
 	path = 3semestre/poo/arvores/AVLArray
 	url = git@github.com:fccerri/AVLArray.git
@@ -34,3 +31,6 @@
 [submodule "3semestre/poo/Curso_Scrapper"]
 	path = 3semestre/poo/Curso_Scrapper
 	url = git@github.com:Nickson8/Curso_Scrapper.git
+[submodule "3semestre/MiniSGBD-ArquivosBinarios"]
+	path = 3semestre/MiniSGBD-ArquivosBinarios
+	url = git@github.com:fccerri/MiniSGBD-ArquivosBinarios.git
