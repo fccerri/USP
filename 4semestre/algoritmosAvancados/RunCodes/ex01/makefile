@@ -13,5 +13,3 @@ clean:
 run:
 	./$(TARGET)
 
-valgrind:
-	valgrind --leak-check=full --show-leak-kinds=all ./$(TARGET)

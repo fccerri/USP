@@ -1,4 +1,4 @@
-TARGET = main
+TARGET = 005ex
 SRC = $(TARGET).cpp
 
 all:
@@ -13,5 +13,3 @@ clean:
 run:
 	./$(TARGET)
 
-valgrind:
-	valgrind --leak-check=full --show-leak-kinds=all ./$(TARGET)

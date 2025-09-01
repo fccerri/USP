@@ -23,7 +23,7 @@ struct jogador{
 
     jogador(int id) : nome(""), latitude(0.0f), longitude(0.0f), distancia(0.0f), id(id) {}
 
-    double haversine (jogador base) {
+    double haversine (const jogador &base) {
         double latOrigemRad = this->latitude * M_PI / 180.0;
         double lonOrigemRad = this->longitude * M_PI / 180.0;
         double latDestinoRad = base.latitude * M_PI / 180.0;
