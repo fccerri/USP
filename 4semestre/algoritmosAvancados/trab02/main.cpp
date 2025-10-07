@@ -1,6 +1,4 @@
 #include <bits/stdc++.h>
-#include <iomanip>
-#include <vector>
 
 using namespace std;
 
@@ -65,7 +63,6 @@ struct aresta {
             for (int j = i + 1; j < sistemas.size(); ++j) {
                 double dist = sistema::calc_dist(sistemas[i], sistemas[j]);
                 if (dist <= tensaoMaxima) {
-                    int s1, s2;
                     //garante ordem alfabetica
                     if (sistema::comparaNome(sistemas[i], sistemas[j])) 
                         arestas.push_back({sistemas[i], sistemas[j], dist}); 
@@ -136,9 +133,9 @@ struct CPP { //closest pair of points
 
     CPP (vector<sistema> sistermas, double tensaoMaxima): tensaoMaxima(tensaoMaxima) {
         sx = sistermas;
-        sort(sx.begin(), sx.end());
+        sort(sx.begin(), sx.end(), sistema::comparaX);
         sy = sistermas;
-        sort(sy.begin(), sy.end());
+        sort(sy.begin(), sy.end(), sistema::comparaY);
     }
 
     aresta achaPontoRessonante() {
@@ -158,8 +155,6 @@ struct CPP { //closest pair of points
 
             aresta minEsq = achaRecursivo(inicio, meio);
             aresta minDir = achaRecursivo(meio + 1, fim);
-
-            //acha usando o metodo
    
             aresta arestaMin =  minEsq.peso < minDir.peso ?  minEsq : minDir; //acha o minmo da direita/esq
 
@@ -171,12 +166,22 @@ struct CPP { //closest pair of points
                     strip.push_back(sx[i]);
             }
 
-            //ordena strip por y (utilizar sy)
+            sort(strip.begin(), strip.end(), sistema::comparaY); //precisa utilizar sy pra otimizar
 
-            //compara a distancia de strip[i] a seus 7 vizinhos (propriedade)
-            //atualiza a aresta se a dsitancia dde strip[i] ao vizinho for menor que o minimo
-
-
+            for (int i = 0; i < strip.size(); i++) {
+                //verifica vizinhos da direita
+                for (int j = 1; j <= 7 && i+j < strip.size(); i++ ) { //usa a propriedade de que só precisa verificar 7 vizinhos
+                    double peso = sistema::calc_dist(strip[i+j], strip[i]);
+                    aresta novoMin = aresta(strip[i+j], strip[i], peso);
+                    arestaMin = arestaMin.peso < novoMin.peso ? arestaMin : novoMin;
+                }
+                //verifica vizinhos da esquerda
+                for (int j = 1; j <= 7 && i-j > 0; i++ ) { //usa a propriedade de que só precisa verificar 7 vizinhos
+                    double peso = sistema::calc_dist(strip[i-j], strip[i]);
+                    aresta novoMin = aresta(strip[i-j], strip[i], peso);
+                    arestaMin = arestaMin.peso < novoMin.peso ? arestaMin : novoMin;
+                }                         
+            }
             
             return arestaMin;
         }
@@ -217,7 +222,7 @@ ostream& operator<<(ostream& os, const aresta& a) { //para printar arestas
 
 int main () {
     int x; cin >> x;
-    for (int i =0; i < x; i++) {
+    for (int i = 0; i < x; i++) {
         int n, importantes; double tensaoMaxima;
         cin >> n >> importantes >> tensaoMaxima;
 
