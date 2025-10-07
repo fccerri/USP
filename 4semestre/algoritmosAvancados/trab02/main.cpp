@@ -1,5 +1,6 @@
 #include <bits/stdc++.h>
 #include <iomanip>
+#include <vector>
 
 using namespace std;
 
@@ -16,10 +17,18 @@ struct sistema {
         return sqrt(dx*dx + dy*dy);
     }
 
-    const bool operator <(const sistema &a) const { //compara sistemas por nome
-        return nome < a.nome;
+    static bool comparaNome(const sistema &a, const sistema &b) { //compara sistemas por nome
+        return  a.nome < b.nome;
     }
-    
+
+    static bool comparaX(const sistema &a, const sistema &b) { //compara sistemas por x
+        return  a.x < b.x;
+    }
+
+    static bool comparaY(const sistema &a, const sistema &b) { //compara sistemas por y
+        return  a.y < b.y;
+    }
+
 };
 
 
@@ -57,16 +66,13 @@ struct aresta {
                 double dist = sistema::calc_dist(sistemas[i], sistemas[j]);
                 if (dist <= tensaoMaxima) {
                     int s1, s2;
-                    if (sistemas[i] < sistemas[j]) { //sistemas ficarão em ordem alfabetica (s1.nome < s2.nome)
-                        s1 = i;
-                        s2 = j;
-                    }
-                    else {
-                        s1 = j;
-                        s2 = i;
-                    }
+                    //garante ordem alfabetica
+                    if (sistema::comparaNome(sistemas[i], sistemas[j])) 
+                        arestas.push_back({sistemas[i], sistemas[j], dist}); 
+                    else 
+                        arestas.push_back({sistemas[j], sistemas[i], dist});
+                        
 
-                    arestas.push_back({sistemas[s1], sistemas[s2], dist});
                 }
                     
             }
@@ -76,7 +82,7 @@ struct aresta {
     }
 };
 
-struct DSU {
+struct DSU { //disjoint set uniom
     map<string, string> pai; //conjuntos
     
     DSU(vector<sistema> sistemas) {
@@ -101,7 +107,7 @@ struct DSU {
         }
     }
 
-    vector<aresta> kruskal(const vector<sistema> &sistemas, double tensaoMaxima) {
+    vector<aresta> kruskal(const vector<sistema> &sistemas, double tensaoMaxima) { //algoritmos de resolucao da parte 1
         vector<aresta> arestas = aresta:: geraArestas(sistemas, tensaoMaxima); //gera arestas do grafo
         sort(arestas.begin(), arestas.end(), aresta::comparaPeso); //ordena por peso 
         
@@ -122,7 +128,89 @@ struct DSU {
 
 };
 
-std::ostream& operator<<(std::ostream& os, const aresta& a) { //para printar arestas
+struct CPP { //closest pair of points
+    vector<sistema> sx, sy; //sistemas odenados por x e por y
+    sistema pontoRessonante;
+    const double tensaoMaxima;
+
+
+    CPP (vector<sistema> sistermas, double tensaoMaxima): tensaoMaxima(tensaoMaxima) {
+        sx = sistermas;
+        sort(sx.begin(), sx.end());
+        sy = sistermas;
+        sort(sy.begin(), sy.end());
+    }
+
+    aresta achaPontoRessonante() {
+        int inicio = 0; 
+        int fim = sx.size() - 1;
+
+        aresta min = achaRecursivo(inicio, fim);
+
+        return min;
+    }
+
+    private:
+        aresta achaRecursivo(int inicio, int fim) {
+            int meio = (inicio + fim) / 2;
+            if (inicio - fim <= 3)
+                return brutaMinimo(inicio, fim); //faz o brute force
+
+            aresta minEsq = achaRecursivo(inicio, meio);
+            aresta minDir = achaRecursivo(meio + 1, fim);
+
+            //acha usando o metodo
+   
+            aresta arestaMin =  minEsq.peso < minDir.peso ?  minEsq : minDir; //acha o minmo da direita/esq
+
+            vector<sistema> strip; //contem os pontos em que dsitancia de x á mediana de x < min
+
+            sistema medianaX = sx[meio];
+            for (int i = inicio; i < fim; i++) {
+                if (sistema::calc_dist(medianaX, sx[i]) < arestaMin.peso)
+                    strip.push_back(sx[i]);
+            }
+
+            //ordena strip por y (utilizar sy)
+
+            //compara a distancia de strip[i] a seus 7 vizinhos (propriedade)
+            //atualiza a aresta se a dsitancia dde strip[i] ao vizinho for menor que o minimo
+
+
+            
+            return arestaMin;
+        }
+
+        aresta brutaMinimo(int inicio, int fim) {
+            double distancia_minima = DBL_MAX;
+            aresta aresta_minima;
+            aresta_minima.peso = distancia_minima;
+                
+            //itera pelos sistemas (3 apenas)
+            for (int i = inicio; i <= fim; ++i) {
+                for (int j = i + 1; j <= fim; ++j) {
+                
+                    double dist_atual = sistema::calc_dist(sx[i], sx[j]);
+                    // se a distancia for a minima ate o momento
+                    if (dist_atual < distancia_minima) {
+                        distancia_minima = dist_atual; //att distancia minima
+                    
+                        // cria a nova aresta minimoa, garantindo a ordem alfabetica dos sistemas
+                        if (sistema::comparaNome(sx[i], sx[j])) 
+                            aresta_minima = aresta(sx[i], sx[j], dist_atual);
+                        else 
+                            aresta_minima = aresta(sx[j], sx[i], dist_atual);
+                    }
+                }
+            }
+
+            return aresta_minima;
+        }
+
+    
+};
+
+ostream& operator<<(ostream& os, const aresta& a) { //para printar arestas
     os  << a.s1.nome << ", " << a.s2.nome << ", " << a.peso << fixed << setprecision(2);
     return os;
 }
@@ -134,8 +222,6 @@ int main () {
         cin >> n >> importantes >> tensaoMaxima;
 
         vector<sistema> sistemas; //vetor de sistemas
-        vector<aresta> mst; //mst (parte 1)
-        aresta ressonancia; //ponto de ressonancia
 
         for (int j = 0; j < importantes; j++ ) { //le os sistemas importantes
             sistema s; cin >> s.nome >> s.x >> s.y;
@@ -143,7 +229,7 @@ int main () {
         }
     
         DSU d = DSU(sistemas); //inicia o dsu
-        mst = d.kruskal(sistemas, tensaoMaxima); //resolve parte 1
+        vector<aresta> mst = d.kruskal(sistemas, tensaoMaxima); //resolve parte 1
 
         for (int j = importantes; j <  n; j++ ) { //le o restante dos sistemas
             sistema s; cin >> s.nome >> s.x >> s.y;
@@ -155,9 +241,11 @@ int main () {
             cout << a << endl;
         }
 
-        //resolve parte 2
-        // cout << "Ponto de ressonância: " << ressonancia << endl; //printa parte 2
-        cout << endl;
+        CPP c = CPP(sistemas, tensaoMaxima);
+        aresta ressonancia = c.achaPontoRessonante();
+        cout << "Ponto de ressonância: " << ressonancia << endl; //printa parte 2
+
+        if (i != x- 1) cout << endl;
 
     }
 }
