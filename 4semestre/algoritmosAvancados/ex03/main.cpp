@@ -1,9 +1,4 @@
-#include <iostream>
-#include <algorithm>
-#include <map>
-#include <vector>
-#include <sstream> 
-
+#include <bits/stdc++.h>
 
 using namespace std;
 
@@ -30,8 +25,11 @@ struct solicitacao {
     }
 
     bool operator<(const solicitacao s) {
-        return this->saida < s.saida; //ordena pelo horario de saida
+        if (this->saida != s.saida) return this->saida < s.saida; // ordena por saida
+        if (this->entrada != s.entrada) return this->entrada < s.entrada;// desempara por entrada
+        if (this->cliente != s.cliente) return this->cliente < s.cliente; //desempata por id
 
+        return true; //evita warning
     }
 
 };
@@ -42,32 +40,36 @@ struct manager {
         modelos[s.carro].push_back(s);
     }
 
-    string opera() {
+    string opera(int n) {
         vector<string> resultados;
-        
-        for (auto& p : modelos) {
-            int id = p.first;
-            vector<solicitacao>& solicitacoes = p.second;
-            
+
+         for (int id = 1; id <= n; id++) {
+            vector<solicitacao>& solicitacoes = modelos[id];
+
             ///ordena solicitacoes
             sort(solicitacoes.begin(), solicitacoes.end());
-            
+
             vector<int> clientesAtendidos;
             int ultimaSaida = -1;
             
             for (auto& s : solicitacoes) {
                 if (s.entrada >= ultimaSaida) {
+
                     clientesAtendidos.push_back(s.cliente);
                     ultimaSaida = s.saida;
                 }
             }
+
             
             // formata o resultado
             stringstream resultado;
-            resultado << id << ": " << clientesAtendidos.size() << " = ";
-            for (size_t i = 0; i < clientesAtendidos.size(); i++) {
-                if (i > 0) resultado << ", ";
-                resultado << clientesAtendidos[i];
+            resultado << id << ": " << clientesAtendidos.size();
+            if (!clientesAtendidos.empty()) {
+                resultado << " = ";
+                for (size_t i = 0; i < clientesAtendidos.size(); i++) {
+                    if (i > 0) resultado << ", ";
+                    resultado << clientesAtendidos[i];
+                }
             }
             resultados.push_back(resultado.str());
         }
@@ -87,8 +89,7 @@ struct manager {
 
 int main () {
     int x; cin >> x;
-    
-    
+
     while (x--) {
         int n, m; cin >> n >> m;
         manager g;
@@ -102,7 +103,8 @@ int main () {
             g.addSolicitacao(s);
         }
 
-        cout << g.opera() << endl;
+        cout << g.opera(n);
+        if (x != 0) cout << endl;
     }
     
 
