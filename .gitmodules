@@ -34,3 +34,6 @@
 [submodule "3semestre/MiniSGBD-ArquivosBinarios"]
 	path = 3semestre/MiniSGBD-ArquivosBinarios
 	url = git@github.com:fccerri/MiniSGBD-ArquivosBinarios.git
+[submodule "4semestre/code-otimization"]
+	path = 4semestre/code-otimization
+	url = https://github.com/vrveiga/code-otimization.git
