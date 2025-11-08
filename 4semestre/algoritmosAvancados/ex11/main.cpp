@@ -13,7 +13,7 @@ struct DSU { //disjoint set uniom
         make_set(n1);
         make_set(n2);
         if (unite(n1, n2) == true)
-            conjuntos--;5
+            conjuntos--;
     }
 
     void make_set(int n) {

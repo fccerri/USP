@@ -1,4 +1,5 @@
 #include <bits/stdc++.h>
+#include <climits>
 
 using namespace std;
 
@@ -30,12 +31,12 @@ void intercala(vector<carro> &v, int ini, int meio, int fim) {
     for (i = 0; i < n1; i++) {
         L[i] = v[ini + i];
     }
-    L[n1].fim = 9999999; // inserindo sentinela
+    L[n1].fim = INT_MAX; // inserindo sentinela
     
     for (j = 0; j < n2; j++){
         R[j] = v[meio + j + 1];
     }
-    R[n2].fim = 9999999; // inserindo sentinela
+    R[n2].fim = INT_MAX; // inserindo sentinela
     
     // intercalando arranjos
     i = j = 0;
