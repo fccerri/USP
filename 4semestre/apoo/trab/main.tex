@@ -1,0 +1,627 @@
+\documentclass[12pt, a4paper]{article}
+
+% --- PACOTES ---
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[brazil]{babel}
+\usepackage[a4paper, top=2.5cm, bottom=2.5cm, left=3cm, right=2cm]{geometry}
+\usepackage{graphicx} % Para inserir imagens
+\usepackage{float}    % Para posicionamento exato de figuras [H]
+\usepackage{hyperref} % Para links
+\usepackage{titlesec} % Formatação de títulos
+\usepackage{enumitem} % Listas personalizadas
+\usepackage{listings} % Para código
+\usepackage{xcolor}   % Cores para código
+\usepackage{fancyhdr} % Cabeçalhos e rodapés
+\usepackage{setspace} % Espaçamento entre linhas
+
+% --- CONFIGURAÇÕES DE LINKS ---
+\hypersetup{
+    colorlinks=true,
+    linkcolor=black,
+    filecolor=magenta,      
+    urlcolor=blue,
+    pdftitle={Relatório Final APOO},
+}
+
+% --- CONFIGURAÇÃO DO CABEÇALHO E RODAPÉ ---
+\pagestyle{fancy}
+\fancyhf{}
+\setlength{\headheight}{14.5pt} % Ajuste para remover warning do fancyhdr
+\lhead{SSC0124 - Análise e Projeto Orientado a Objetos}
+\rhead{ICMC - USP}
+\cfoot{\thepage}
+
+% --- CONFIGURAÇÃO DE LISTINGS (CÓDIGO) ---
+\lstset{
+    language=Python,
+    basicstyle=\ttfamily\footnotesize,
+    keywordstyle=\color{blue},
+    stringstyle=\color{green!50!black},
+    commentstyle=\color{gray},
+    numbers=left,
+    numberstyle=\tiny\color{gray},
+    stepnumber=1,
+    breaklines=true,
+    frame=single,
+    showstringspaces=false,
+    tabsize=4,
+    captionpos=b,
+    inputencoding=utf8,
+    extendedchars=true,
+    literate={á}{{\'a}}1 {ã}{{\~a}}1 {é}{{\'e}}1 {ó}{{\'o}}1 {ç}{{\c{c}}}1 {ê}{{\^e}}1 {à}{{\`a}}1 {í}{{\'i}}1
+}
+
+% --- COMANDO SEGURO PARA IMAGENS ---
+% Verifica se a imagem existe antes de tentar incluir. 
+% Se não existir, cria um quadro de aviso para evitar erro de compilação.
+\newcommand{\safeincludegraphics}[2][]{%
+  \IfFileExists{#2}{%
+    \includegraphics[#1]{#2}%
+  }{%
+    \framebox{\begin{minipage}{0.9\textwidth}%
+      \centering%
+      \vspace{2cm}%
+      \textbf{Imagem não encontrada: \texttt{#2}}\\%
+      \small Faça o upload deste arquivo no Overleaf para visualizar a imagem.%
+      \vspace{2cm}%
+    \end{minipage}}%
+  }%
+}
+
+% --- DADOS DO TRABALHO ---
+\title{
+    \vspace{-2cm}
+    \vspace{1cm}
+    \textbf{Universidade de São Paulo}\\
+    \textbf{Instituto de Ciências Matemáticas e de Computação}\\
+    \vspace{2cm}
+    \Large \textbf{Sistema de Gestão de Tarefas Acadêmicas}\\
+    \large Relatório de Projeto\\
+    \vspace{1cm}
+    \small Disciplina: SSC0124 - Análise e Projeto Orientado a Objetos\\
+    Profa. Dra. Lina Garcés
+}
+
+\author{
+    \textbf{Integrantes do Grupo:} \\
+    Caroline Akimi Kurosaki Ueda - 15445630 \\
+    Felipe Camargo Cerri - 15451119 \\
+    Nicolas de Sousa Maia - 15481857
+}
+
+\date{São Carlos, 8 de dezembro de 2025}
+
+% --- INÍCIO DO DOCUMENTO ---
+\begin{document}
+
+\maketitle
+\thispagestyle{empty}
+\newpage
+
+\tableofcontents
+\newpage
+
+\onehalfspacing
+
+% ==============================================================================
+% SEÇÃO 1: INTRODUÇÃO
+% ==============================================================================
+\section{Introdução}
+
+O presente trabalho tem como objetivo aplicar os conhecimentos adquiridos na disciplina de Análise e Projeto Orientado a Objetos (SSC0124) para o desenvolvimento de um sistema de software que solucione um problema real. O sistema proposto visa auxiliar estudantes universitários no gerenciamento semestral de suas tarefas acadêmicas e no acompanhamento das frequências nas disciplinas matriculadas.
+
+A partir da lista de requisitos funcionais fornecida, o projeto abrange desde a modelagem inicial, com Diagramas de Casos de Uso e Componentes, até o detalhamento e implementação de um componente específico do sistema. O relatório a seguir documenta as etapas de análise, projeto e implementação realizadas pelo grupo.
+
+% ==============================================================================
+% SEÇÃO 2: CASOS DE USO (REQUISITOS)
+% ==============================================================================
+\section{Lista de Requisitos Funcionais e Casos de Uso}
+
+De acordo com os requisitos funcionais fornecidos para o sistema, organizamos os casos de uso para uma melhor modelagem do sistema como constam abaixo:
+
+\subsection{Componente de Cadastro e Autenticação}
+\begin{itemize}
+    \item Como Aluno, eu gostaria de realizar o meu cadastro no sistema.
+    \item Como Aluno, eu gostaria de fazer login no sistema.
+    \item Como Aluno, eu gostaria de fazer logout do sistema.
+    \item Como Aluno, eu gostaria de recuperar minha senha.
+\end{itemize}
+
+\subsection{Componente de Gerenciamento de Disciplinas}
+\begin{itemize}
+    \item Como Aluno, eu gostaria de cadastrar, editar e excluir disciplinas.
+    \item Como Aluno, eu gostaria de associar tarefas, provas e trabalhos a uma disciplina.
+    \item Como Aluno, eu gostaria de configurar os pesos das avaliações na disciplina.
+    \item Como Sistema, eu gostaria de calcular as médias por grupo de atividades e a média final da disciplina.
+\end{itemize}
+
+\subsection{Componente de Gerenciamento de Tarefas e Atividades}
+\begin{itemize}
+    \item Como Aluno, eu gostaria de criar, editar e excluir tarefas (atividades, aulas, provas, trabalhos).
+    \item Como Aluno, eu gostaria de visualizar as tarefas, seus prazos e status.
+    \item Como Aluno, eu gostaria de marcar uma tarefa como concluída.
+    \item Como Aluno, eu gostaria de registrar a nota obtida em uma tarefa.
+    \item Como Aluno, eu gostaria de definir lembretes para tarefas próximas do prazo.
+\end{itemize}
+
+\subsection{Componente de Controle de Frequência}
+\begin{itemize}
+    \item Como Aluno, eu gostaria de registrar minha frequência em uma aula.
+    \item Como Aluno, eu gostaria de informar o número total de aulas previstas no semestre.
+    \item Como Aluno, eu gostaria de editar ou excluir um registro de frequência incorreto.
+    \item Como Sistema, eu gostaria de calcular o total de faltas e a porcentagem de presença automaticamente.
+    \item Como Sistema, eu gostaria de emitir um alerta quando a porcentagem de faltas estiver próxima do limite.
+    \item Como Aluno, eu gostaria de configurar um limite de faltas que gera uma notificação de aviso.
+    \item Como Aluno, eu gostaria de visualizar o relatório de frequência e de risco de reprovação por falta de cada disciplina.
+\end{itemize}
+
+\subsection{Componente de Relatórios (Dashboard)}
+\begin{itemize}
+    \item Como Aluno, eu gostaria de visualizar minhas tarefas e aulas.
+    \item Como Aluno, eu gostaria de filtrar tarefas por disciplina, tipo ou status.
+    \item Como Aluno, eu gostaria de ordenar as tarefas por data ou prioridade.
+    \item Como Aluno, eu gostaria de visualizar um resumo de pendências e conclusão de tarefas com percentual de presença por disciplina.
+    \item Como Aluno, eu gostaria de visualizar um resumo de pendências e conclusão de tarefas com percentual de presença geral por semestre.
+\end{itemize}
+
+\newpage
+
+% ==============================================================================
+% SEÇÃO 3: DIAGRAMA DE CASOS DE USO
+% ==============================================================================
+\section{Diagrama de Casos de Uso}
+
+Abaixo apresenta-se o diagrama de Casos de Uso do Sistema de Gestão Acadêmica, modelados a partir dos Casos de Uso definidos anteriormente.
+
+\begin{figure}[H]
+    \centering
+    % DICA: Para redimensionar, altere o valor de 'width' (ex: 0.5\textwidth, 10cm, 100mm)
+    \safeincludegraphics[width=0.8\textwidth]{diagramaCasosDeUso.png}
+    \caption{Diagrama de Casos de Uso - Sistema de Gestão Acadêmica}
+    \label{fig:casos_uso}
+\end{figure}
+
+\newpage
+
+% ==============================================================================
+% SEÇÃO 4: DIAGRAMA DE COMPONENTES
+% ==============================================================================
+\section{Diagrama de Componentes}
+
+O diagrama a seguir ilustra a arquitetura do sistema e o relacionamento entre seus componentes.
+
+\begin{figure}[H]
+    \centering
+    % DICA: Para redimensionar, altere o valor de 'width' (ex: 0.5\textwidth, 10cm, 100mm)
+    \safeincludegraphics[width=0.9\textwidth]{diagramaComponentes.png}
+    \caption{Diagrama de Componentes do Sistema}
+    \label{fig:componentes}
+\end{figure}
+
+\newpage
+
+% ==============================================================================
+% SEÇÃO 5: DETALHAMENTO DO COMPONENTE SELECIONADO
+% ==============================================================================
+\section{Detalhamento do Componente: Cadastro e Autenticação}
+
+O componente "\textbf{Cadastro e Autenticação}" foi selecionado para detalhamento aprofundado, incluindo descrições estendidas, modelagem de classes e sequências.
+
+\subsection{Descrições Estendidas dos Casos de Uso}
+
+\subsubsection{Caso de uso: Cadastro no sistema}
+\begin{description}
+    \item[Ator principal:] Aluno
+    \item[Interessados e Interesses:] \hfill \\
+    \textit{Aluno:} Deseja realizar o cadastro no sistema para gerenciamento semestral de tarefas acadêmicas e no acompanhamento das frequências em disciplinas matriculadas.
+    \item[Pré-Condições:] O aluno tem acesso ao sistema e possui os dados necessários para o cadastro.
+    \item[Pós-Condições:] O aluno tem seus dados cadastrados na base de dados de alunos e possui um cadastro registrado.
+    \item[Cenário de Sucesso Principal:] \hfill % Força o início da lista na linha seguinte
+    \begin{enumerate}
+        \item O aluno acessa o sistema de gerenciamento de tarefas.
+        \item O aluno deseja criar um cadastro.
+        \item O aluno manda seus dados para o cadastro.
+        \item O sistema realiza o cadastro.
+    \end{enumerate}
+    \item[Fluxo alternativo 1:] (1-3)
+    \begin{enumerate}
+        \item[4.] O sistema não consegue realizar o cadastro.
+    \end{enumerate}
+\end{description}
+
+\subsubsection{Caso de uso: Fazer login no sistema}
+\begin{description}
+    \item[Ator principal:] Aluno
+    \item[Interessados e Interesses:] \hfill \\
+    \textit{Aluno:} Deseja acessar sua conta pessoal para visualizar e gerenciar suas disciplinas, notas e tarefas de forma segura. \\
+    \textit{Sistema:} Necessita identificar o usuário para apresentar os dados corretos e restringir o acesso a informações privadas.
+    \item[Pré-Condições:] O aluno já possui um cadastro realizado e o sistema está disponível.
+    \item[Pós-Condições:] O aluno é autenticado e direcionado para o painel principal (dashboard) com sua sessão iniciada.
+    \item[Cenário de Sucesso Principal:] \hfill % Força o início da lista na linha seguinte
+    \begin{enumerate}
+        \item O aluno acessa a tela de login do sistema.
+        \item O aluno insere suas credenciais de acesso (usuário/e-mail e senha).
+        \item O aluno solicita a entrada no sistema.
+        \item O sistema valida as credenciais fornecidas.
+        \item O sistema libera o acesso e redireciona o aluno para a página inicial.
+    \end{enumerate}
+    \item[Fluxo alternativo 1:] (1-4)
+    \begin{enumerate}
+        \item[5.] O aluno não está cadastrado no sistema.
+        \item[6.] O aluno deve seguir para página de cadastro.
+    \end{enumerate}
+\end{description}
+
+\subsubsection{Caso de uso: Fazer logout do sistema}
+\begin{description}
+    \item[Ator principal:] Aluno
+    \item[Interessados e Interesses:] \hfill \\
+    \textit{Aluno:} Deseja encerrar sua sessão para garantir a segurança de seus dados e evitar que terceiros acessem suas informações acadêmicas.
+    \item[Pré-Condições:] O aluno deve estar logado no sistema.
+    \item[Pós-Condições:] A sessão do aluno é encerrada, e ele é redirecionado para a tela de login ou página pública.
+    \item[Cenário de Sucesso Principal:] \hfill % Força o início da lista na linha seguinte
+    \begin{enumerate}
+        \item O aluno, estando logado, seleciona a opção de sair (logout).
+        \item O sistema recebe a requisição de encerramento.
+        \item O sistema finaliza a sessão do usuário.
+        \item O sistema redireciona o aluno para a tela de login.
+    \end{enumerate}
+\end{description}
+
+\subsubsection{Caso de uso: Recuperar senha}
+\begin{description}
+    \item[Ator principal:] Aluno
+    \item[Interessados e Interesses:] \hfill \\
+    \textit{Aluno:} Deseja redefinir sua senha de acesso caso a tenha esquecido, para poder acessar o sistema de gerenciamento de suas atividades acadêmicas.
+    \item[Pré-Condições:] O aluno possui um cadastro ativo, mas não se lembra da credencial de senha.
+    \item[Pós-Condições:] O sistema indica as instruções e muda senha do usuário no banco de dados.
+    \item[Cenário de Sucesso Principal:] \hfill % Força o início da lista na linha seguinte
+    \begin{enumerate}
+        \item O aluno acessa o menu principal e seleciona a opção de recuperação de senha.
+        \item O sistema solicita o e-mail ou identificador associado à conta.
+        \item O aluno fornece o dado solicitado.
+        \item O sistema verifica a existência do usuário na base de dados.
+        \item O sistema solicita a nova senha do aluno.
+        \item O aluno redefine a senha.
+    \end{enumerate}
+\end{description}
+
+\subsection{Identificação de Classes}
+
+Para o componente de Cadastro e Autenticação, foram identificadas as seguintes classes, já pensando na compossição do código orientado a objetos que precisará ser desacoplado e seguir o principio de separação de responsabilidades, utilizando o padrão MVC:
+
+\textbf{Classe: Aluno}
+\begin{itemize}
+    \item \textbf{Atributos:} nome, email, senha.
+    \item \textbf{Métodos:} \texttt{inicialização}.
+\end{itemize}
+
+\textbf{Classe: View}
+\begin{itemize}
+    \item \textbf{Responsabilidade:} Interface com o usuário.
+    \item \textbf{Métodos:} menu, get\_dados, tela\_inicial, dados\_incorretos, get\_email, get\_senha, email\_ja\_cadastrado.
+
+\end{itemize}
+
+\textbf{Classe: Controller}
+\begin{itemize}
+    \item \textbf{Responsabilidade:} Controle do fluxo de interação.
+    \item \textbf{Métodos:} cria\_aluno, verifica\_email, verifica\_aluno.
+\end{itemize}
+
+\textbf{Classe: Model}
+\begin{itemize}
+    \item \textbf{Responsabilidade:} Persistência de dados.
+    \item \textbf{Atributos:} df (DataFrame).
+    \item \textbf{Métodos:} acha\_aluno, insere\_aluno, muda\_senha.
+\end{itemize}
+
+\subsection{Diagrama de Classes}
+
+O diagrama abaixo apresenta o modelo de domínio planejado para o componente, definindo as multiplicidades das relações.
+
+\begin{figure}[H]
+    \centering
+    % DICA: Para redimensionar, altere o valor de 'width' (ex: 0.5\textwidth, 10cm, 100mm)
+    \safeincludegraphics[width=0.9\textwidth]{diagramaClasses.png}
+    \caption{Diagrama de Classes - Componente de Cadastro (Domínio)}
+    \label{fig:classes}
+\end{figure}
+
+\newpage
+
+\subsection{Diagramas de Sequência}
+
+Abaixo estão apresentados os diagramas de sequência para as funcionalidades do componente utilizando o padrão MVC.
+
+\subsubsection{Fluxo de Login}
+
+\begin{figure}[H]
+    \centering
+    % DICA: Para redimensionar, altere o valor de 'width' (ex: 0.5\textwidth, 10cm, 100mm)
+    \safeincludegraphics[width=0.9\textwidth]{login.png}
+    \caption{Diagrama de Sequência - Login}
+\end{figure}
+
+\subsubsection{Fluxo de Logout}
+
+\begin{figure}[H]
+    \centering
+    % DICA: Para redimensionar, altere o valor de 'width' (ex: 0.5\textwidth, 10cm, 100mm)
+    \safeincludegraphics[width=0.5\textwidth]{logout.png}
+    \caption{Diagrama de Sequência - Logout}
+\end{figure}
+
+\subsubsection{Fluxo de Cadastro}
+
+\begin{figure}[H]
+    \centering
+    % DICA: Para redimensionar, altere o valor de 'width' (ex: 0.5\textwidth, 10cm, 100mm)
+    \safeincludegraphics[width=1\textwidth]{cadastro.png}
+    \caption{Diagrama de Sequência - Cadastro}
+\end{figure}
+
+\subsubsection{Fluxo de Recuperação de Senha}
+
+\begin{figure}[H]
+    \centering
+    % DICA: Para redimensionar, altere o valor de 'width' (ex: 0.5\textwidth, 10cm, 100mm)
+    \safeincludegraphics[width=1\textwidth]{recuperarSenha.png}
+    \caption{Diagrama de Sequência - Recuperação de Senha}
+\end{figure}
+
+
+% ==============================================================================
+% SEÇÃO 6: CÓDIGO FONTE
+% ==============================================================================
+\section{Implementação (Código Fonte)}
+
+Conforme requisitos do projeto, abaixo apresentamos a implementação das classes e métodos desenvolvidos para o componente de Cadastro e Autenticação, a partir do planejamento realizado até o momento.
+
+\textbf{Nota Importante:} Para a correta execução do código abaixo, é necessário que o arquivo \texttt{banco\_de\_dados.csv} esteja presente no mesmo diretório do script principal. Este arquivo deve conter, no mínimo, o cabeçalho com as colunas esperadas respectivamente (Nome, Email, Senha) para garantir a persistência e recuperação dos dados.
+
+\begin{lstlisting}[language=Python, caption={Código Fonte - main.py}]
+import pandas as pd
+
+class Aluno:
+    def __init__(self, dados):
+        self.nome = dados[0]
+        self.email = dados[1]
+        self.senha = dados[2]
+
+class View:
+    def __init__(self):
+        pass
+    
+    def menu(self):
+        print("--------------")
+        print("Bem vindo ao sistema de gerenciamento de diciplinas")
+        print("1 - Cadastro")
+        print("2 - Login")
+        print("3 - Recuperar Senha")
+
+        while(True):
+            opcao = input("Digite sua opcao (1, 2 ou 3): ")
+
+            if(opcao == '1'):
+                return "Cadastro"
+            elif(opcao == '2'):
+                return "Login"
+            elif(opcao == '3'):
+                return "Recu_Senha"
+            else:
+                print("Opcao invalida!")
+    
+    def get_dados(self):
+        nome = input("Digite seu nome: ")
+        email = input("Digite seu email: ")
+        senha = input("Digite sua senha: ")
+
+        return [nome, email, senha]
+    
+    def tela_inicial(self, aluno):
+        print("--------------")
+        print(f"Olá, {aluno.nome}!")
+        input("Pressione Enter para fazer Logout...")
+    
+    def dados_incorretos(self):
+        print("--------------")
+        print("Dados Incorretos!")
+        
+        print("1 - Voltar ao Menu")
+        print("2 - Tentar novamente")
+        while(True):
+            opcao = input("Digite sua opcao (1 ou 2): ")
+
+            if(opcao == '1'):
+                return True
+            elif(opcao == '2'):
+                return False
+            else:
+                print("Opcao invalida!")
+    
+    def get_email(self):
+        return input("Digite seu email: ")
+    
+    def get_senha(self):
+        return input("Digite sua nova senha: ")
+    
+    def email_ja_cadastrado(self):
+        print("Email ja cadastrado! Tente outro")
+
+class Controller:
+    def __init__(self):
+        pass
+
+    def cria_aluno(self, dados: list):
+        return Aluno(dados)
+    
+    def verifica_email(self, email, model):
+        dados = model.acha_aluno(email)
+
+        if(dados != None):
+            return self.cria_aluno(dados)
+        else:
+            return None
+    
+    def verifica_aluno(self, dados, model):
+        dados_achados = model.acha_aluno(dados[1])
+
+        if(dados_achados == None):
+            return None
+        
+        if(dados_achados[2] == dados[2]):
+            if(dados_achados[0] == dados[0]):
+                return self.cria_aluno(dados_achados)
+
+class Model:
+    def __init__(self, banco_de_dados):
+        self.df = pd.read_csv(banco_de_dados)
+        self.df = self.df[0:0]
+        self.df.to_csv(banco_de_dados, index=False)
+    
+    def acha_aluno(self, email):
+        linha = self.df.loc[self.df['Email'] == email]
+        if linha.empty:
+            return None
+        
+        return linha[['Nome', 'Email', 'Senha']].iloc[0].tolist()
+    
+    def insere_aluno(self, aluno):
+        self.df.loc[len(self.df)] = [aluno.nome, aluno.email, aluno.senha]
+        self.df.to_csv("banco_de_dados.csv", index=False)
+    
+    def muda_senha(self, aluno, senha):
+        self.df.loc[self.df['Email'] == aluno.email, 'Senha'] = senha
+        self.df.to_csv("banco_de_dados.csv", index=False)
+
+def main():
+    view = View()
+    controller = Controller()
+    model = Model("./banco_de_dados.csv")
+
+    opcao = view.menu()
+
+    while(True):
+        if(opcao == "Menu"):
+            opcao = view.menu()
+
+        elif(opcao == "Cadastro"):
+            print("--------------\nCadastro")
+            dados = view.get_dados()
+
+            #Verifica se esse email ja foi cadastrado
+            aluno = controller.verifica_email(dados[1], model)
+            if(aluno != None):
+                view.email_ja_cadastrado()
+                continue
+
+            aluno = controller.cria_aluno(dados)
+
+            model.insere_aluno(aluno)
+            opcao = "Login"
+
+        elif(opcao == "Login"):
+            print("--------------\nLogin")
+            dados = view.get_dados()
+
+            aluno = controller.verifica_aluno(dados, model)
+            
+            if(aluno != None):
+                view.tela_inicial(aluno)
+
+                opcao = "Menu"
+            else:
+                mudar = view.dados_incorretos()
+                if(mudar == True):
+                    opcao = "Menu"
+        elif(opcao == "Recu_Senha"):
+            print("--------------\nRecuperar Senha")
+            email = view.get_email()
+
+            aluno = controller.verifica_email(email, model)
+
+            if(aluno != None):
+                senha = view.get_senha()
+
+                model.muda_senha(aluno, senha)
+
+                opcao = "Login"
+            else:
+                mudar = view.dados_incorretos()
+                if(mudar == True):
+                    opcao = "Menu"
+
+if __name__ == "__main__":
+    main()
+\end{lstlisting}
+
+
+% ==============================================================================
+% SEÇÃO 7: DISCUSSÃO
+% ==============================================================================
+\section{Discussão}
+
+Esta seção descreve as dificuldades e desafios encontrados durante a execução do projeto, bem como os principais aprendizados obtidos pelo grupo.
+
+\subsection{Dificuldades e Desafios}
+
+Um dos principais desafios encontrados pelo grupo foi a adaptação ao processo rigoroso de modelagem antes da implementação, uma vez que a equipe, inicialmente, não estava acostumada a realizar um planejamento tão extenso e detalhado antes de iniciar a codificação propriamente dita. 
+
+Especificamente, a elaboração dos diagramas do componente escolhido (Cadastro e Autenticação) apresentou dificuldades significativas:
+
+\begin{itemize}
+    \item \textbf{Diagrama de Classes:} Uma dificuldade central foi a visualização e definição das classes não explícitas no domínio do problema, como \textit{Controller}, \textit{View} e \textit{Model}. Inicialmente, o grupo tendeu a focar apenas nas entidades de dados (como Aluno), sem perceber a necessidade de classes de controle e interface para um bom design de software. Ao perceber a necessidade de mais classes para garantir o desacoplamento do código e a separação de responsabilidades (padrão MVC), o grupo optou por uma estratégia diferente: modelar primeiramente os diagramas de sequência, permitindo visualizar a troca de mensagens necessária para realizar cada caso de uso, o que, por sua vez, revelou naturalmente quais classes (e métodos) seriam necessários. Somente após essa etapa é que o diagrama de classes foi consolidado, com a adição de informações estruturais importantes como as multiplicidades e os tipos de relacionamento.
+    \item \textbf{Diagramas de Sequência:} A modelagem da interação entre os objetos para realizar os casos de uso (Login, Cadastro, etc.) também foi desafiadora. Garantir que a troca de mensagens entre as classes (View, Controller, Model/Aluno) estivesse coerente com o objetivo do projeto e cobrisse todos os fluxos (principal e alternativos) demandou diversas revisões.
+\end{itemize}
+
+\subsection{Aprendizados Importantes}
+
+Apesar das dificuldades iniciais, a execução deste projeto proporcionou aprendizados valiosos, destacando-se o ganho de percepção sobre a importância da modelagem de software:
+
+\begin{itemize}
+    \item \textbf{Visão Geral do Projeto:} O grupo compreendeu que modelar o projeto, especialmente nas etapas iniciais de definição dos Casos de Uso e elaboração do Diagrama de Casos de Uso, é fundamental para obter uma visão clara e abrangente do sistema, permitindo identificar requisitos e funcionalidades que poderiam ter passado despercebidos se tivéssemos partido direto para o código. Adicionalmente, a elaboração do diagrama de componentes foi essencial para visualizar como as diferentes partes do sistema interagem entre si, mesmo que apenas um componente tenha sido implementado em código, essa modelagem permitiu compreender a arquitetura geral e a importância do desacoplamento para a manutenibilidade e escalabilidade do software, demonstrando como as dependências entre os módulos devem ser gerenciadas em um contexto mais amplo.
+    \item \textbf{Planejamento como Guia:} A experiência demonstrou na prática que o tempo investido no planejamento e na modelagem resulta em uma implementação mais organizada e menos sujeita a erros estruturais. O código final tornou-se uma consequência natural das decisões tomadas durante a fase de design, validando a importância dessa etapa.
+\end{itemize}
+
+
+% ==============================================================================
+% SEÇÃO 8: USO DE IA GENERATIVA
+% ==============================================================================
+\section{Uso de IA Generativa}
+
+Esta seção descreve o uso de ferramentas de Inteligência Artificial Generativa no desenvolvimento deste trabalho, detalhando as ferramentas empregadas e refletindo sobre o impacto no aprendizado.
+
+\subsection{Fins de Utilização e Ferramentas}
+
+A Inteligência Artificial Generativa, especificamente o modelo de linguagem \textbf{Gemini}, foi utilizada em diversas etapas estratégicas do desenvolvimento deste relatório e do projeto como um todo:
+
+\begin{itemize}
+    \item \textbf{Geração de Diagramas em PlantUML:} O Gemini foi utilizado para gerar o código PlantUML correspondente ao Diagrama de Casos de Uso, traduzindo os requisitos textuais levantados pelo grupo para a sintaxe correta da ferramenta de diagramação.
+    \item \textbf{Estruturação e Diagramação do Relatório (LaTeX):} A IA foi fundamental para criar a estrutura inicial do relatório em LaTeX. Com base nas etapas do projeto já modeladas e escritas pelo grupo, o modelo auxiliou na organização do conteúdo, criação de seções, formatação de listas e inserção de imagens.
+    \item \textbf{Modelagem de Descrições Estendidas:} As descrições estendidas dos casos de uso também contaram com o auxílio da IA para sua formatação e detalhamento inicial (embora os prompts específicos utilizados nesta etapa não tenham sido recuperados para inclusão neste documento).
+\end{itemize}
+
+\subsection{Reflexão sobre o Aprendizado}
+
+O grupo avaliou o uso da IA Generativa como \textbf{positivo}. A principal vantagem percebida foi a facilitação do trabalho mecânico e repetitivo, como a codificação da sintaxe LaTeX ou PlantUML, permitindo que os integrantes focassem seus esforços nas atividades intelectuais de análise e design.
+
+No entanto, é crucial destacar que o uso da ferramenta não substituiu o domínio do conteúdo por parte do grupo.
+\begin{itemize}
+    \item \textbf{Análise Crítica Ativa:} Tanto nos diagramas quanto nos casos de uso extendidos gerados, o grupo precisou exercer uma revisão crítica constante. Os resultados gerados pela IA frequentemente precisavam de ajustes e correções para representar fielmente o design desejado e as especificidades do projeto, exigindo que tivessemos clareza sobre os conceitos apresentados na disciplina.
+    \item \textbf{Modelagem de Casos de Uso Estendidos:} Adicionalmente, para a geração das descrições estendidas, foi necessário primeiro elaborar manualmente um "caso de uso base" robusto para servir de exemplo no prompt. Isso demonstrou que a IA funcionou como uma alavanca de produtividade, mas a base intelectual partiu do conhecimento prévio do grupo sobre como um caso de uso deve ser estruturado.
+    \item \textbf{Produtividade na Documentação:} O uso da IA para a geração do relatório LaTeX foi particularmente benéfico, uma vez que o conteúdo do trabalho (textos, códigos, modelagens) já estava quase totalmente desenvolvido e estruturado pelo grupo, a ferramenta serviu como um eficiente meio de diagramação e formatação. Ela agilizou a tarefa de transformar o conteúdo bruto em um documento bem formatado, lidando com a complexidade da sintaxe LaTeX e permitindo que o foco permanecesse na qualidade das informações apresentadas, e não apenas na formatação do documento.
+\end{itemize}
+
+Em conclusão, o uso da IA diminuiu a carga de trabalho operacional sem desincentivar o aprendizado. Ela atuou como uma ferramenta de apoio que, ao remover barreiras mecânicas de formatação e sintaxe, permitiu ao grupo dedicar mais tempo à qualidade da modelagem e à lógica do sistema.
+
+\subsection{Links para Prompts Utilizados}
+Abaixo estão os links para as conversas e prompts utilizados durante a elaboração do projeto:
+
+\begin{itemize}
+    \item \url{https://gemini.google.com/share/970ab50a11d8}
+    \item \url{https://gemini.google.com/share/39e31d6d6178}
+\end{itemize}
+
+\end{document}
