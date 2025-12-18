@@ -55,3 +55,6 @@
 [submodule "4semestre/apoo/leo_eats"]
     path = 4semestre/apoo/leo_eats
     url = https://github.com/fccerri/leo_eats.git
+[submodule "4semestre/so/horsetype"]
+	path = 4semestre/so/horsetype
+	url = https://github.com/vrveiga/horsetype.git
