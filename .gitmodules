@@ -37,3 +37,6 @@
 [submodule "4semestre/code-otimization"]
 	path = 4semestre/code-otimization
 	url = https://github.com/vrveiga/code-otimization.git
+[submodule "4semestre/apoo/leo_eats"]
+	path = 4semestre/apoo/leo_eats
+	url = https://github.com/fccerri/leo_eats.git
