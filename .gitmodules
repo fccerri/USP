@@ -1,42 +1,57 @@
-[submodule "2semestre/alg/Caixeiro"]
-	path = 2semestre/alg/Caixeiro
-	url = git@github.com:Petroncini/Caixeiro.git
 [submodule "1semestre/eletronica/projeto-fonte-usp"]
-	path = 1semestre/eletronica/projeto-fonte-usp
-	url = git@github.com:vrveiga/projeto-fonte-usp.git
+    path = 1semestre/eletronica/projeto-fonte-usp
+    url = https://github.com/vrveiga/projeto-fonte-usp.git
 [submodule "1semestre/eletronica/relogio-binario"]
-	path = 1semestre/eletronica/relogio-binario
-	url = git@github.com:vrveiga/relogio-binario.git
-[submodule "2semestre/pratica_sd"]
-	path = 2semestre/pratica_sd
-	url = git@github.com:fccerri/pratica_sd
+    path = 1semestre/eletronica/relogio-binario
+    url = https://github.com/vrveiga/relogio-binario.git
 [submodule "1semestre/ICC/Projeto_icc1"]
-	path = 1semestre/ICC/Projeto_icc1
-	url = git@github.com:fccerri/Projeto_icc1
-[submodule "3semestre/org_comp/calculadoraAssembly"]
-	path = 3semestre/org_comp/calculadoraAssembly
-	url = git@github.com:fccerri/calculadoraAssembly.git
-[submodule "3semestre/funcional/trabalhoFuncional01"]
-	path = 3semestre/funcional/trabalhoFuncional01
-	url = git@github.com:fccerri/trabalhoFuncional01.git
-[submodule "3semestre/poo/arvores/AVLArray"]
-	path = 3semestre/poo/arvores/AVLArray
-	url = git@github.com:fccerri/AVLArray.git
+    path = 1semestre/ICC/Projeto_icc1
+    url = https://github.com/fccerri/Projeto_icc1.git
+
+[submodule "2semestre/alg/Caixeiro"]
+    path = 2semestre/alg/Caixeiro
+    url = https://github.com/Petroncini/Caixeiro.git
+[submodule "2semestre/pratica_sd"]
+    path = 2semestre/pratica_sd
+    url = https://github.com/fccerri/pratica_sd.git
+[submodule "2semestre/lab_icc2/lab_icc2_trabalhos"]
+    path = 2semestre/lab_icc2/lab_icc2_trabalhos
+    url = https://github.com/fccerri/lab_icc2_trabalhos.git
+[submodule "2semestre/icc2/gerente-de-processos"]
+    path = 2semestre/icc2/gerente-de-processos
+    url = https://github.com/vrveiga/gerente-de-processos.git
+[submodule "2semestre/icc2/soletra-terminal"]
+    path = 2semestre/icc2/soletra-terminal
+    url = https://github.com/vrveiga/soletra-terminal.git
+[submodule "2semestre/fisica/simulador-lancamento"]
+    path = 2semestre/fisica/simulador-lancamento
+    url = https://github.com/vrveiga/simulador-lancamento.git
 [submodule "2semestre/fisica/orb"]
-	path = 2semestre/fisica/orb
-        url = <git@github.com:vrveiga/orb.git>
+    path = 2semestre/fisica/orb
+    url = https://github.com/vrveiga/orb.git
+
+[submodule "3semestre/org_comp/calculadoraAssembly"]
+    path = 3semestre/org_comp/calculadoraAssembly
+    url = https://github.com/fccerri/calculadoraAssembly.git
+[submodule "3semestre/funcional/trabalhoFuncional01"]
+    path = 3semestre/funcional/trabalhoFuncional01
+    url = https://github.com/fccerri/trabalhoFuncional01.git
+[submodule "3semestre/poo/arvores/AVLArray"]
+    path = 3semestre/poo/arvores/AVLArray
+    url = https://github.com/fccerri/AVLArray.git
 [submodule "3semestre/funcional/trabalhoFuncional02"]
-	path = 3semestre/funcional/trabalhoFuncional02
-	url = git@github.com:fccerri/trabalhoFuncional02.git
+    path = 3semestre/funcional/trabalhoFuncional02
+    url = https://github.com/fccerri/trabalhoFuncional02.git
 [submodule "3semestre/poo/Curso_Scrapper"]
-	path = 3semestre/poo/Curso_Scrapper
-	url = git@github.com:Nickson8/Curso_Scrapper.git
+    path = 3semestre/poo/Curso_Scrapper
+    url = https://github.com/Nickson8/Curso_Scrapper.git
 [submodule "3semestre/MiniSGBD-ArquivosBinarios"]
-	path = 3semestre/MiniSGBD-ArquivosBinarios
-	url = git@github.com:fccerri/MiniSGBD-ArquivosBinarios.git
+    path = 3semestre/MiniSGBD-ArquivosBinarios
+    url = https://github.com/fccerri/MiniSGBD-ArquivosBinarios.git
+
 [submodule "4semestre/code-otimization"]
-	path = 4semestre/code-otimization
-	url = https://github.com/vrveiga/code-otimization.git
+    path = 4semestre/code-otimization
+    url = https://github.com/vrveiga/code-otimization.git
 [submodule "4semestre/apoo/leo_eats"]
-	path = 4semestre/apoo/leo_eats
-	url = https://github.com/fccerri/leo_eats.git
+    path = 4semestre/apoo/leo_eats
+    url = https://github.com/fccerri/leo_eats.git
